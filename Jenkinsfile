@@ -28,13 +28,13 @@ podTemplate(yaml: '''
 ''') {
   node(POD_LABEL) {
     stage('Get a Gradle project') {
-      git url: 'https://github.com/Shim8934/spring_petclinic.git', branch: 'main'
+      git url: 'https://github.com/Shim8934/jpasample.git', branch: 'main'
       container('gradle') {
         stage('Build a Gradle project') {
           sh '''
           gradle build -x test
-          workspace=${pwd}
-          'ls'
+          echo `pwd`
+          echo `ls`
           '''
         }
       }
@@ -44,7 +44,7 @@ podTemplate(yaml: '''
       container('kaniko') {
         stage('Build a ECR Image') {
           sh '''
-            /kaniko/executor --context ${workspace} --dockerfile ${workspace}/Dockerfile --destination=963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${env.BUILD_NUMBER}
+            /kaniko/executor --context `pwd` --destination=963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${env.BUILD_NUMBER}
           '''
 
         }
