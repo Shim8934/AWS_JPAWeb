@@ -44,7 +44,7 @@ podTemplate(yaml: '''
       container('kaniko') {
         stage('Build a ECR Image') {
           sh '''
-            /kaniko/executor --context ${workspace} --destination=963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${env.BUILD_NUMBER}
+            /kaniko/executor --context ${workspace}/build/libs --destination=963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${env.BUILD_NUMBER}
           '''
 
         }
