@@ -1,15 +1,16 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/jpashop
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql:// :3306/jpasampleshop?useSSL=false
+    username: jpasampleshop
+    password: jpasampleshop
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 #        show_sql: true
         format_sql: true
 
