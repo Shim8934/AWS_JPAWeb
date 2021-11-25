@@ -34,6 +34,7 @@ podTemplate(yaml: '''
           sh '''
           gradle build -x test
           echo `pwd`
+          echo `env.BUILD_NUMBER`
           '''
         }
       }
