@@ -71,6 +71,7 @@ podTemplate(yaml: '''
                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
                git add manifest/jpasampleshop/base/jpasampleshop.yaml
                git commit -m "Update Spring Service Tag Image By CD Automate"
+               git push
                '''
            } //
         }
