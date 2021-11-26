@@ -59,23 +59,24 @@ podTemplate(yaml: '''
     }
 
     stage ('Edit Manifest & Push') {
-        git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
         container('git') {
            stage('Edit Manifest & Push') {
-               sh '''
-               "ls"
-               set +x
-               export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
-               git config --global user.email "shim8934@gmail.com"
+               git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
+               withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'shim8934')]) {
+                   sh '''
+                   set +x
+                   git config --global user.email "shim8934@gmail.com"
+                   git config --global user.name "ShimKiYoung"
 
-               git pull origin main:refs/remotes/origin/main
+                   git pull origin main:refs/remotes/origin/main
 
-               sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
-               git add manifest/jpasampleshop/base/jpasampleshop.yaml
-               git commit -m "Update Spring Service Tag Image By CD Automate"
-               git push --set-upstream origin main
-               '''
-           } //git remote add origin https://github.com/jooseop/goorm-kube1-team4.git
+                   sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
+                   git add manifest/jpasampleshop/base/jpasampleshop.yaml
+                   git commit -m "Update Spring Service Tag Image By CD Automate"
+                   git push --set-upstream origin main https://github.com/jooseop/goorm-kube1-team4.git
+                   '''
+               } // to use ${GIT_PASSWORD} -> 시스템관리 전역 변수로 깃허브 비밀번호를 GIT_PASSWORD 키값으로 등록 후 사용
+           } //
         }
     } // Edit manifest stage End
   }
