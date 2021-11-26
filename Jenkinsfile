@@ -63,7 +63,7 @@ podTemplate(yaml: '''
         container('git') {
            stage('Edit Manifest & Push') {
                sh '''
-               "ls -al"
+               "ls"
                set +x
                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                git config --global user.email "shim8934@gmail.com"
