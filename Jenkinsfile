@@ -67,6 +67,7 @@ podTemplate(yaml: '''
                set +x
                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                git config --global user.email "shim8934@gmail.com"
+               git branch --set-upstream-to=origin/main main
                git pull
 
                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
