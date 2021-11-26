@@ -69,7 +69,7 @@ podTemplate(yaml: '''
                    sh "echo $pass"
 
                    sh "echo 2nd Line"
-                   def encodedPassword = URLEncoder.encode('[GIT_PASSWORD]','UTF-8')
+                   def encodedPassword = URLEncoder.encode($pass,'UTF-8')
                    def gitUrl = "https://shim8934:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
 
 
