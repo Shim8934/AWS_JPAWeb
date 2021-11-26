@@ -74,14 +74,9 @@ podTemplate(yaml: '''
                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                git config --global user.email "shim8934@gmail.com"
 
-               git clone "https://github.com/jooseop/goorm-kube1-team4.git"
-
                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
-               git add .
+               git add goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
                git commit -m "Update Spring Service Tag Image By CD Automate"
-
-
-
                '''
            }
         }
