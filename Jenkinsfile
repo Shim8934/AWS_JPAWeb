@@ -59,26 +59,28 @@ podTemplate(yaml: '''
     }
 
     stage ('Edit Manifest & Push') {
-       withCredentials([gitUsernamePassword(credentialsId: 'shim8934', gitToolName: 'git-tool')]) {
-            sh 'printenv'
-           String encoded_password = java.net.URLEncoder.encode(GIT_PASSWORD, "UTF-8")
+        container('git') {
+           withCredentials([usernamePassword(credentialsId: 'shim8934',usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PWD', gitToolName: 'git-tool')]) {
+               sh 'printenv'
+               String encoded_password = java.net.URLEncoder.encode(GIT_PASSWORD, "UTF-8")
 
-           dir("user-api") {
-                sh("""
-                #!/usr/bin/env bash
-                set +x
-                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
-                git config --global user.email "shim8934@gmail.com"
-                git checkout main
-                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
+               dir("user-api") {
+                    sh("""
+                    #!/usr/bin/env bash
+                    set +x
+                    export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
+                    git config --global user.email "shim8934@gmail.com"
+                    git checkout main
+                    sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
 
-                git add .
-                ls
-                git commit -m "updated the image tagNumber with Auto CI/CD"
-                git push https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git
-                """
-                )
-           }
+                    git add .
+                    ls
+                    git commit -m "updated the image tagNumber with Auto CI/CD"
+                    git push https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git
+                    """
+                    )
+               }
+            }
         }
     }
   }
