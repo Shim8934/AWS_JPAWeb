@@ -18,6 +18,10 @@ podTemplate(yaml: '''
         volumeMounts:
           - name: docker-config
             mountPath: /kaniko/.docker
+      - name: git
+        image: alpine/git
+        command: cat
+        imagePullPolicy: Always
       restartPolicy: Never
       volumes:
         - name: docker-config
@@ -52,27 +56,29 @@ podTemplate(yaml: '''
     }
 
     stage ('Edit Manifest & Push') {
-        withCredentials([usernamePassword(withCredentialsId: 'accessgit',
-            usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PWD')]) {
+        container('git') {
+            withCredentials([usernamePassword(withCredentialsId: 'accessgit',
+                usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PWD')]) {
 
-            def encodedPassword = URLEncoder.encode("$GIT_PWD",'UTF-8')
-            def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
+                def encodedPassword = URLEncoder.encode("$GIT_PWD",'UTF-8')
+                def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
 
-            dir("user-api") {
-                sh("""
-                #!/usr/bin/env bash
-                set +x
-                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
-                git config --global user.email "shim8934@gmail.com"
-                git checkout main
-                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
+                dir("user-api") {
+                    sh("""
+                    #!/usr/bin/env bash
+                    set +x
+                    export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
+                    git config --global user.email "shim8934@gmail.com"
+                    git checkout main
+                    sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
 
-                git add .
-                ls
-                git commit -m "updated the image tagNumber with Auto CI/CD"
-                git push https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git
-                """
-                )
+                    git add .
+                    ls
+                    git commit -m "updated the image tagNumber with Auto CI/CD"
+                    git push https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git
+                    """
+                    )
+                }
             }
         }
     }
