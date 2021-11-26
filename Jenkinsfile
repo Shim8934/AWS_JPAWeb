@@ -8,7 +8,7 @@ podTemplate(yaml: '''
         command:
         - sleep
         args:
-        - 99d
+        - 10d
       - name: kaniko
         image: gcr.io/kaniko-project/executor:debug
         imagePullPolicy: Always
@@ -23,6 +23,8 @@ podTemplate(yaml: '''
         imagePullPolicy: Always
         command:
         - sleep
+        args:
+        - 10d
       restartPolicy: Never
       volumes:
         - name: docker-config
