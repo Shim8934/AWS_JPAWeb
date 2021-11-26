@@ -60,13 +60,10 @@ podTemplate(yaml: '''
 
     stage ('Edit Manifest & Push') {
         container('git') {
-            withCredentials([usernamePassword(withCredentialsId: 'accessgit',
-                usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PWD')]) {
+           withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'MyID', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+               String encoded_password = java.net.URLEncoder.encode(env.GIT_PASSWORD, "UTF-8")
 
-                def encodedPassword = URLEncoder.encode("$GIT_PWD",'UTF-8')
-                def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
-
-                dir("user-api") {
+               dir("user-api") {
                     sh("""
                     #!/usr/bin/env bash
                     set +x
@@ -81,7 +78,7 @@ podTemplate(yaml: '''
                     git push https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git
                     """
                     )
-                }
+               }
             }
         }
     }
