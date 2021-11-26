@@ -59,8 +59,8 @@ podTemplate(yaml: '''
     }
 
     stage ('Edit Manifest & Push') {
-        container('git') {
-           stage('Edit Manifest & Push') {
+        //container('git') {
+          // stage('Edit Manifest & Push') {
                git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
                withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'shim8934')]) {
                    sh '''
@@ -76,8 +76,8 @@ podTemplate(yaml: '''
                    git push --set-upstream origin main https://github.com/jooseop/goorm-kube1-team4.git
                    '''
                } // to use ${GIT_PASSWORD} -> 시스템관리 전역 변수로 깃허브 비밀번호를 GIT_PASSWORD 키값으로 등록 후 사용
-           } //
-        }
+         //  } //
+       // }
     } // Edit manifest stage End
   }
 }
