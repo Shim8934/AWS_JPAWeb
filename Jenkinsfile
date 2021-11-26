@@ -62,9 +62,6 @@ podTemplate(yaml: '''
         git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
         container('git') {
            stage('Edit Manifest & Push') {
-           withCredentials([string(credentialsId: "shim8934", variable: "credentialsVariable")]) {
-
-           }
                sh '''
                "ls"
                set +x
