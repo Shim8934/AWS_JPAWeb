@@ -60,16 +60,21 @@ podTemplate(yaml: '''
 
     stage ('Edit Manifest & Push') {
         container('git') {
-           stage('Checkout external proj') {
+           stage('Edit Manifest & Push') {
                git branch: 'main',
                    credentialsId: 'shim8934',
                    url: 'https://github.com/jooseop/goorm-kube1-team4.git'
 
                sh '''
                #!/usr/bin/env bash
+               'printenv'
+               'pwd'
+
                set +x
                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                git config --global user.email "shim8934@gmail.com"
+
+               git clone "https://github.com/jooseop/goorm-kube1-team4.git"
 
                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' goorm-kube1-team4/manifest/jpasampleshop/base/jpasampleshop.yaml
                git add .
