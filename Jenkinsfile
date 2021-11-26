@@ -62,9 +62,10 @@ podTemplate(yaml: '''
         //container('git') {
           // stage('Edit Manifest & Push') {
                git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
-               withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: '${GIT_PASSWORD}', usernameVariable: 'shim8934')]) {
-                   def encodedPassword = URLEncoder.encode("${PASSWORD}",'UTF-8')
+               withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'shim8934')]) {
+                   def encodedPassword = URLEncoder.encode("${GIT_PASSWORD}",'UTF-8')
                    def gitUrl = "https://shim8934:${encodedPassword}@github.com/jooseop/goorm-kube1-team4.git"
+                   def password = this.env['PASSWORD'];
 
                    dir ("user-api") {
                     sh("""
