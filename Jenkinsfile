@@ -64,7 +64,7 @@ podTemplate(yaml: '''
                git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
                withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'shim8934')]) {
                    sh "echo 1st Line"
-                   def pass = [GIT_PASSWORD];
+                   def pass = '[GIT_PASSWORD]';
 
                    sh "echo $pass"
 
