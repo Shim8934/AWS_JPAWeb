@@ -20,8 +20,9 @@ podTemplate(yaml: '''
             mountPath: /kaniko/.docker
       - name: git
         image: alpine/git
-        command: cat
         imagePullPolicy: Always
+        command:
+        - sleep
       restartPolicy: Never
       volumes:
         - name: docker-config
