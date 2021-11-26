@@ -60,8 +60,9 @@ podTemplate(yaml: '''
 
     stage ('Edit Manifest & Push') {
         container('git') {
-           withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'shim8934', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
-               String encoded_password = java.net.URLEncoder.encode(env.GIT_PASSWORD, "UTF-8")
+           withCredentials([gitUsernamePassword(credentialsId: 'shim8934', gitToolName: 'git-tool')]) {
+                sh 'printenv'
+               String encoded_password = java.net.URLEncoder.encode(GIT_PASSWORD, "UTF-8")
 
                dir("user-api") {
                     sh("""
