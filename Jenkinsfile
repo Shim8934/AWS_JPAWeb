@@ -62,13 +62,16 @@ podTemplate(yaml: '''
         git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
         container('git') {
            stage('Edit Manifest & Push') {
+           withCredentials([string(credentialsId: "shim8934", variable: "credentialsVariable")]) {
+
+           }
                sh '''
                "ls"
                set +x
                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                git config --global user.email "shim8934@gmail.com"
-               git branch --set-upstream-to=origin/main main
-               git pull
+
+               git pull origin main:refs/remotes/origin/main
 
                sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
                git add manifest/jpasampleshop/base/jpasampleshop.yaml
