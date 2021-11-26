@@ -63,7 +63,7 @@ podTemplate(yaml: '''
            stage('Checkout external proj') {
                git branch: 'main',
                    credentialsId: 'shim8934',
-                   url: 'https://github.com/jooseop/goorm-kube1-team4.git', branch: 'main'
+                   url: 'https://github.com/jooseop/goorm-kube1-team4.git'
 
                sh '''
                #!/usr/bin/env bash
