@@ -65,6 +65,7 @@ podTemplate(yaml: '''
                withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'shim8934')]) {
                    sh '''
                    set +x
+                   export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                    git config --global user.email "shim8934@gmail.com"
                    git config --global user.name "ShimKiYoung"
 
