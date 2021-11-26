@@ -62,7 +62,7 @@ podTemplate(yaml: '''
         //container('git') {
           // stage('Edit Manifest & Push') {
                git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
-               withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'shim8934')]) {
+               withCredentials([usernamePassword(credentialsId: 'shim8934', passwordVariable: '${GIT_PASSWORD}', usernameVariable: 'shim8934')]) {
                    sh '''
                    set +x
                    export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
