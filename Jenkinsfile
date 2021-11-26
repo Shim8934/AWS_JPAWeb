@@ -59,16 +59,13 @@ podTemplate(yaml: '''
     }
 
     stage ('Edit Manifest & Push') {
+        git branch: 'main', credentialsId: 'shim8934', url: 'https://github.com/jooseop/goorm-kube1-team4.git'
         container('git') {
            stage('Edit Manifest & Push') {
-               git branch: 'main',
-                   credentialsId: 'shim8934',
-                   url: 'https://github.com/jooseop/goorm-kube1-team4.git'
-
                sh '''
                #!/usr/bin/env bash
                'printenv'
-               'pwd'
+               'ls -al'
 
                set +x
                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
