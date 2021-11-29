@@ -79,7 +79,7 @@ podTemplate(yaml: '''
 		    ls
 		    git checkout main
 		    sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
-		    git add .
+		    git add manifest/jpasampleshop/base/jpasampleshop.yaml
 		    ls
 		    git commit -m "updated the image tag with BUILD_NUMBER"
 		    pwd
