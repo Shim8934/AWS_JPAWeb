@@ -75,12 +75,11 @@ podTemplate(yaml: '''
 		    export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
 		    git config --global user.name "Shim KiYoung"
 		    git config --global user.email "shim8934@gmail.com"
-		    pwd
-		    ls
 		    git checkout main
 		    sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
+
 		    git add manifest/jpasampleshop/base/jpasampleshop.yaml
-		    ls
+
 		    git commit -m "updated the image tag with BUILD_NUMBER"
 		    pwd
 		    git push "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
