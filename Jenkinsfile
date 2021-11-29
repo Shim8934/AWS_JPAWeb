@@ -68,24 +68,24 @@ podTemplate(yaml: '''
                 def registry = "963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop"
                 sh "pwd"
                 sh "ls"
-                dir("user-api") {
-                    sh("""
-                            #!/usr/bin/env bash
-                            set +x
-                            export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
-                            git config --global user.name "Shim KiYoung"
-                            git config --global user.email "shim8934@gmail.com"
-                            pwd
-                            ls
-                            git checkout main
-                            sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
-                            git add .
-                            ls
-                            git commit -m "updated the image tag with BUILD_NUMBER"
-                            pwd
-                            git push "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
-                        """)
-                }
+	        
+		sh("""
+		    #!/usr/bin/env bash
+		    set +x
+		    export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
+		    git config --global user.name "Shim KiYoung"
+		    git config --global user.email "shim8934@gmail.com"
+		    pwd
+		    ls
+		    git checkout main
+		    sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
+		    git add .
+		    ls
+		    git commit -m "updated the image tag with BUILD_NUMBER"
+		    pwd
+		    git push "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
+		""")
+                
         }// withCredentials 끝
     } // Edit manifest stage End
   }
