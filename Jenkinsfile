@@ -66,8 +66,8 @@ podTemplate(yaml: '''
                 def encodedPassword = URLEncoder.encode("$GIT_PWD",'UTF-8')
                 def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
                 def registry = "963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop"
-                pwd
-                ls
+                sh "pwd"
+                sh "ls"
                 dir("user-api") {
                     sh("""
                             #!/usr/bin/env bash
