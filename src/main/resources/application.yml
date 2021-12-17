@@ -10,8 +10,8 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL57InnoDBDialec
-#        show_sql: true
+        dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+        #        show_sql: true
         format_sql: true
 
 
