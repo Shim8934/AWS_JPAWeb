@@ -51,7 +51,7 @@ podTemplate(yaml: '''
       container('kaniko') {
         stage('Build a ECR Image') {
           sh '''
-            /kaniko/executor --context `pwd` --destination=963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${BUILD_NUMBER}
+            /kaniko/executor --context `pwd` --destination=963961866076.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${BUILD_NUMBER}
           '''
 
         }
@@ -64,8 +64,8 @@ podTemplate(yaml: '''
                 usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PWD')]) {
 
                 def encodedPassword = URLEncoder.encode("$GIT_PWD",'UTF-8')
-                def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
-                def registry = "963886026253.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop"
+                def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/Shim8934/AWSSetting.git"
+                def registry = "963961866076.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop"
 
                 sh "pwd"
                 sh "ls"
@@ -84,7 +84,7 @@ podTemplate(yaml: '''
 
 		    git commit -m "updated the image tag with BUILD_NUMBER"
 		    pwd
-		    git push "https://$GIT_USER:$encodedPassword@github.com/jooseop/goorm-kube1-team4.git"
+		    git push "https://$GIT_USER:$encodedPassword@github.com/Shim8934/AWSSetting.git"
 		""")
                 
         }// withCredentials 끝
