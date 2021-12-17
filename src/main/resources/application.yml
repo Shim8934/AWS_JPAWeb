@@ -7,7 +7,7 @@ spring:
 # 웹훅 테스트용
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
