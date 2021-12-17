@@ -59,7 +59,7 @@ podTemplate(yaml: '''
     }
 
     stage ('Edit Manifest & Push') {
-        git url: 'https://github.com/jooseop/goorm-kube1-team4.git', branch: 'jpashop'
+        git url: 'https://github.com/Shim8934/AWSSetting.git', branch: 'main'
         withCredentials([usernamePassword(credentialsId: 'shim8934',
                 usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PWD')]) {
 
