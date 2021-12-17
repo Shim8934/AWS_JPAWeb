@@ -4,7 +4,7 @@ spring:
     username: jpasampleshop
     password: jpasampleshop
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+# 웹훅 테스트용
   jpa:
     hibernate:
       ddl-auto: create-drop
