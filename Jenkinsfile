@@ -76,7 +76,7 @@ podTemplate(yaml: '''
 		    export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
 		    git config --global user.name "Shim KiYoung"
 		    git config --global user.email "shim8934@gmail.com"
-		    git checkout jpashop
+
 
 		    sed -i 's/jpasampleshop:.*/jpasampleshop:${BUILD_NUMBER}/' manifest/jpasampleshop/base/jpasampleshop.yaml
 
