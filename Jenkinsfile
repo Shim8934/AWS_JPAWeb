@@ -45,8 +45,7 @@ podTemplate(yaml: '''
           git url: 'https://github.com/Shim8934/AWS_JPAWeb.git', branch: 'main'
           container('gradle') {
             stage('Build a Gradle project') {
-              sh '''
-	      echo gradleStart
+              sh '''	      
               gradle build -x test
               echo `pwd`
               'printenv'
