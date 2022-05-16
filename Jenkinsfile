@@ -97,7 +97,7 @@ podTemplate(yaml: '''
         } // Edit manifest stage End
         notifySlack("${currentBuild.currentResult}", "#00FF00")
     } catch(e) {
-        currentBuild.result = e
+        currentBuild.result = $e
         notifySlack("${currentBuild.currentResult}", "#FF0000")
     }
   }
