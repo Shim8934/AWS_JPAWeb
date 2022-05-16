@@ -42,7 +42,7 @@ podTemplate(yaml: '''
   node(POD_LABEL) {
     try {
         stage('Get a Gradle project') {
-          git url: 'https://github.com/Shim8934/jpasample.git', branch: 'main'
+          git url: 'https://github.com/Shim8934/AWS_JPAWeb.git', branch: 'main'
           container('gradle') {
             stage('Build a Gradle project') {
               sh '''
