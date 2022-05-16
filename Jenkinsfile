@@ -40,7 +40,7 @@ podTemplate(yaml: '''
               name: docker-config
 ''') {
   node(POD_LABEL) {
-    try {
+//    try {
         stage('Get a Gradle project') {
           git url: 'https://github.com/Shim8934/AWS_JPAWeb.git', branch: 'main'
           container('gradle') {
@@ -96,6 +96,7 @@ podTemplate(yaml: '''
             }// withCredentials 끝
         } // Edit manifest stage End
         notifySlack("${currentBuild.currentResult}", "#00FF00")
+  try {
     } catch(e) {
     	currentBuild.result = "FAILURE"
         notifySlack("${currentBuild.currentResult}", "#FF0000")
