@@ -58,7 +58,7 @@ podTemplate(yaml: '''
           container('kaniko') {
             stage('Build a ECR Image') {
               sh '''
-                /kaniko/executor --context `pwd` --destination=963961866076.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop:${BUILD_NUMBER}
+                /kaniko/executor --context `pwd` --destination=262613226814.dkr.ecr.ap-northeast-2.amazonaws.com/jpasampleshop:${BUILD_NUMBER}
               '''
 
             }
@@ -72,7 +72,7 @@ podTemplate(yaml: '''
 
                     def encodedPassword = URLEncoder.encode("$GIT_PWD",'UTF-8')
                     def gitUrl = "https://$GIT_USER:$encodedPassword@github.com/Shim8934/AWSSetting.git"
-                    def registry = "963961866076.dkr.ecr.ap-northeast-2.amazonaws.com/team4/jpasampleshop"
+                    def registry = "262613226814.dkr.ecr.ap-northeast-2.amazonaws.com/jpasampleshop"
 
                     sh "pwd"
                     sh "ls"
