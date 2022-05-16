@@ -46,8 +46,8 @@ podTemplate(yaml: '''
           container('gradle') {
             stage('Build a Gradle project') {
               sh '''	      
-              gradle build -x test
-              echo `pwd`
+	      echo `pwd`
+              gradle build -x test              
               'printenv'
               '''
             }
